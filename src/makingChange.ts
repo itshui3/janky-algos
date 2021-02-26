@@ -1,9 +1,9 @@
-function numberOfWaysToMakeChange(n: number, denoms: number[]) {
+function changeAlgo(n: number, denoms: number[]) {
 	if (n === 0) return 1
   // Write your code here.
 	const sortedDenoms = denoms.sort((a, b) => b-a);
 
-	let ways: number = 0
+	let ways = 0
 	recurseDenoms(n, sortedDenoms);
 	
 	return ways;
@@ -32,4 +32,4 @@ function numberOfWaysToMakeChange(n: number, denoms: number[]) {
 	}
 }
 
-export { numberOfWaysToMakeChange }
+export {changeAlgo}

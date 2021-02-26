@@ -1,6 +1,7 @@
 
 
-import {numberOfWaysToMakeChange as changeAlgo} from '../makingChange'
+
+import { changeAlgo } from '../makingChange'
 
 // numberOfWaysToMakeChange(n: number, denoms: number[])
 

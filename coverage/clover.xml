@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1614373467423" clover="3.2.0">
-  <project timestamp="1614373467423" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1614378698379" clover="3.2.0">
+  <project timestamp="1614378698379" name="All files">
+    <metrics statements="16" coveredstatements="16" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3" elements="29" coveredelements="29" complexity="0" loc="16" ncloc="16" packages="1" files="1" classes="1"/>
+    <file name="makingChange.ts" path="C:\Users\Hui\Desktop\prog\myProjs\janky-algos\src\makingChange.ts">
+      <metrics statements="16" coveredstatements="16" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3"/>
+      <line num="2" count="10" type="cond" truecount="2" falsecount="0"/>
+      <line num="4" count="19" type="stmt"/>
+      <line num="6" count="9" type="stmt"/>
+      <line num="7" count="9" type="stmt"/>
+      <line num="9" count="9" type="stmt"/>
+      <line num="13" count="51" type="cond" truecount="2" falsecount="0"/>
+      <line num="16" count="28" type="cond" truecount="2" falsecount="0"/>
+      <line num="17" count="28" type="stmt"/>
+      <line num="22" count="23" type="stmt"/>
+      <line num="23" count="23" type="cond" truecount="2" falsecount="0"/>
+      <line num="25" count="23" type="stmt"/>
+      <line num="26" count="52" type="cond" truecount="2" falsecount="0"/>
+      <line num="27" count="10" type="stmt"/>
+      <line num="28" count="10" type="stmt"/>
+      <line num="30" count="42" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+    </file>
   </project>
 </coverage>
