@@ -11,14 +11,18 @@ export function minNumberOfCoinsForChange(n: number, denoms: number[]) {
     let runningRet: number = NaN;
 
     re_change(n, sortedDenoms, 0);
-    return runningRet;
+		if (runningRet) {
+				return runningRet
+		} else { return -1 }
+		
     function re_change(nLeft: number, denomsLeft: number[], runningC: number) {
         // if !runningRet, replace with anything
         if (denomsLeft.length === 1) {
 
             if (nLeft % denomsLeft[0] === 0) {
+
                 const count = runningC + (nLeft / denomsLeft[0])
-                console.log('count', count);
+								
                 if (!runningRet) {
                     runningRet = count
                 } else if (count < runningRet) {
@@ -33,10 +37,11 @@ export function minNumberOfCoinsForChange(n: number, denoms: number[]) {
             re_change(nLeft, denomsLeft.slice(1), runningC);
         } else 
         
-        if (nLeft / denomsLeft[0] > 1) {
+        if (nLeft / denomsLeft[0] >= 1) {
             // calculate possible number of coins usable in cur denom
             const coinsPC = Math.floor(nLeft / denomsLeft[0]) + 1
             for (let i = 0; i < coinsPC; i++) {
+							console.log(i);
                 re_change(
                     nLeft-(i*denomsLeft[0]), 
                     denomsLeft.slice(1), 
@@ -48,5 +53,3 @@ export function minNumberOfCoinsForChange(n: number, denoms: number[]) {
         
     }
 }
-
-minNumberOfCoinsForChange(10, [1, 5, 10])

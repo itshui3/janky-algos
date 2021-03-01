@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node build/makingChange.js",
     "test": "jest --coverage --verbose",
-    "minCoinsChange": "ts-node ./src/minCoinsChange.ts"
+    "minCoinsChange": "ts-node ./src/minCoinsChange"
   },
   "repository": {
     "type": "git",
