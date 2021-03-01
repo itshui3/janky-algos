@@ -41,7 +41,6 @@ export function minNumberOfCoinsForChange(n: number, denoms: number[]) {
             // calculate possible number of coins usable in cur denom
             const coinsPC = Math.floor(nLeft / denomsLeft[0]) + 1
             for (let i = 0; i < coinsPC; i++) {
-							console.log(i);
                 re_change(
                     nLeft-(i*denomsLeft[0]), 
                     denomsLeft.slice(1), 

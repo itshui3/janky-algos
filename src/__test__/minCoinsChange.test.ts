@@ -44,7 +44,7 @@ test ('it calculates min coins needed for change', () => {
             inputs: {
                 n: 1,
                 denoms: [1, 5, 10]
-            }, output: 10
+            }, output: 1
         }, //.7
         {
             inputs: {
