@@ -20,7 +20,7 @@ class ListNode {
 }
 
  function hasCycle(head: ListNode | null): boolean {
-    let cycleCache: object = {};
+    let cycleCache: any = {};
     
     let cur = head;
     
