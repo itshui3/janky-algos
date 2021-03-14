@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "me clumsily plodding through algorithms for funz and adventurez. Not aiming for best practice, mostly looking to explore imaginative ways of solving puzzles!",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node build/makingChange.js",
     "test": "jest --coverage --verbose",
-    "minCoinsChange": "ts-node ./src/minCoinsChange"
+    "minCoinsChange": "ts-node ./src/minCoinsChange",
+    "minCoinsChangeLeet": "ts-node ./src/minCoinsLeetcode"
   },
   "repository": {
     "type": "git",
