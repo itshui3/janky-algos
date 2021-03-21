@@ -14,7 +14,7 @@
     if (!headA || !headB) { return null }
 
     let cachedA: object = {};
-    let curA: ListNode = headA;
+    let curA: ListNode | null = headA;
     
     while (curA) {
         
