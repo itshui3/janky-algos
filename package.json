@@ -4,6 +4,7 @@
   "description": "me clumsily plodding through algorithms for funz and adventurez. Not aiming for best practice, mostly looking to explore imaginative ways of solving puzzles!",
   "main": "index.js",
   "scripts": {
+    "start": "node ./dist/bundle.js",
     "test": "jest --coverage --verbose"
   },
   "repository": {
