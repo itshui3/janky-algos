@@ -8,7 +8,6 @@ export function threeNumberSum(array: number[], targetSum: number): Triplet[] {
 	for (let i = 0; i < array.length-1; i++) {
 //outer pointer
 		for (let l = i+1; l < array.length; l++) {
-			// console.log(`i: ${i}, l: ${l}`)
 //inner pointer
 			const reqNum = targetSum - (array[i] + array[l]);
 		
