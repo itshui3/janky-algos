@@ -8,8 +8,6 @@ if (!coins.length) return 1;
     
     while (true) {
 // [0] check if change is constructible
-//	in other words, given a target change value
-//	and an array of coins, determine if it is constructible
         if (!constructChange(sortedCoins, change)) return change;
         change++
     }
