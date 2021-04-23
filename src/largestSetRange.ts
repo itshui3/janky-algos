@@ -1,7 +1,5 @@
 export function bf_largestRange(array: number[]): [number, number] {
 // Write your code here.
-    
-    
     const arrangedNums = array.sort((a, b) => a-b);
     
     let counter = 0;
@@ -46,7 +44,7 @@ export function bf_largestRange(array: number[]): [number, number] {
 return range;
 }
 
-export function largestRange(array: number[]): [number, number] {
+export function setCheck_largestRange(array: number[]): [number, number] {
 // Write your code here.
     const numSet = new Set(array);
     
@@ -85,4 +83,44 @@ export function largestRange(array: number[]): [number, number] {
     }
     
 return range;
+}
+
+export function largestRange(array: number[]): [number, number] {
+// Write your code here.
+    let min = Math.min(...array);
+    let max = Math.max(...array);
+
+    let numHash: { [key: string]: boolean } = {};
+    
+    for (let i = 0; i < array.length; i++) {
+        numHash[array[i]] = false;
+    }
+    
+    let range: [number, number] = [min, min];
+    
+    for (let i = 0; i < array.length; i++) {
+        if ( numHash[ array[i] ] ) continue;
+        
+        // check left
+        let leftVals = array[i];
+        for (let l = leftVals-1; l > min-1; l--) {
+            if (l in numHash) {
+                numHash[l] = true;
+                leftVals -= 1;
+            } else break;
+        }
+        // check right
+        let rightVals = array[i];
+        for (let r = rightVals+1; r < max+1; r++) {
+            if (r in numHash) {
+                numHash[r] = true;
+                rightVals += 1;
+            } else break;
+        }
+        
+        if (rightVals - leftVals > range[1] - range[0]) {
+            [range[0], range[1]] = [leftVals, rightVals];
+        }
+    }
+    return range;
 }
