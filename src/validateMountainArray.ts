@@ -30,13 +30,13 @@ export function validMountainArray(arr: number[]): boolean {
 };
 
 export function cleaner_validMountainArray(arr: number[]): boolean {
-    // fail-case: mountain not possible
+    // [0] fail-case: mountain not possible due to array length
     if (arr.length < 3) return false;
-    // fail-case: flatness occurs
+    // [1] fail-case: flatness occurs
     for (let i = 1; i < arr.length; i++) {
         if (arr[i] === arr[i-1]) return false;
     }
-    // fail-case: incline does not occur
+    // [2] fail-case: incline does not occur
     if (arr[1] < arr[0]) return false;
 
     // handles incline
@@ -44,16 +44,19 @@ export function cleaner_validMountainArray(arr: number[]): boolean {
     let i = 2;
     while (i < arr.length && inclining) {
 
+        // decline begins
         if (arr[i] < arr[i-1]) inclining = false;
         i++;
         
     }
     
-    // fail-case: never declines
-    if (i === arr.length && inclining) return false;
+    // [3] fail-case: never declines
+    if (inclining) return false;
     
     // handles decline
     for (; i < arr.length; i++) {
+
+        // [4] fail-case: incline occurs while declining
         if (arr[i] > arr[i-1]) return false;
     }
     
