@@ -115,3 +115,9 @@ return rewards.reduce((prev, cur) => {
         return prev + cur;
     }, 0);
 }
+
+let dir = {
+    n: [0, 0]
+}
+
+dir.n
