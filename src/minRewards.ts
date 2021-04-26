@@ -1,3 +1,34 @@
+export function bf_minRewards(scores: number[]) {
+// Write your code here.
+    let rewards = scores.map(_ => 1);
+    
+    for (let i = 1; i < scores.length; i++) {
+        // handle upslope
+        if (scores[i] > scores[i-1]) {
+            rewards[i] = rewards[i-1]+1;
+        } 
+        // handle downslope
+        else {
+            let d = i-1;
+            while (d > -1 && scores[d] > scores[d+1]) {
+                rewards[d] = rewards[d+1]+1;
+                d--;
+            }
+        }
+    }
+    
+    for (let i = scores.length-2; i > 0; i--) {
+        if (scores[i-1] < scores[i] && scores[i+1] < scores[i]) {
+            rewards[i] = [rewards[i-1], rewards[i+1]].reduce((prev, cur) => {
+                if (cur+1 > prev) return cur+1;
+                else return prev;
+            }, 0);
+        }
+    }
+    
+    return rewards.reduce((prev, cur) => prev+cur, 0);
+}
+
 export function minRewards(scores: number[]) {
 	
 	let rewards = scores.map(_ => NaN);

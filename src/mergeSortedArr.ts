@@ -15,7 +15,7 @@ export function injection_merge(nums1: number[], m: number, nums2: number[], n: 
     
 };
 
-function shift_merge(nums1: number[], m: number, nums2: number[], n: number): void {
+export function shift_merge(nums1: number[], m: number, nums2: number[], n: number): void {
     
     let injector = nums1.length;
     for (let i = m-1; i > -1; i--) {
