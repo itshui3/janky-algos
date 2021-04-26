@@ -29,7 +29,7 @@ export function bf_minRewards(scores: number[]) {
     return rewards.reduce((prev, cur) => prev+cur, 0);
 }
 
-export function minRewards(scores: number[]) {
+export function valleys_minRewards(scores: number[]) {
 	
 	let rewards = scores.map(_ => NaN);
 
@@ -84,4 +84,34 @@ export function minRewards(scores: number[]) {
 	}
 	
   return rewards.reduce((prev, cur) => prev + cur, 0);
+}
+
+export function clean_minRewards(scores: number[]) {
+// Write your code here.
+    let rewards = scores.map(_ => 1);
+    
+    // left to right
+    for (let i = 1; i < scores.length; i++) {
+        if (scores[i] > scores[i-1]) rewards[i] = rewards[i-1]+1;
+    }
+    
+    // right to left
+    for (let i = scores.length-2; i > -1; i--) {
+        if (scores[i] > scores[i+1]) rewards[i] = rewards[i+1]+1;
+    }
+    
+    // re-access peaks
+    for (let i = 1; i < scores.length-1; i++) {
+        if (scores[i-1] < scores[i] && scores[i+1] < scores[i]) {
+            rewards[i] = [rewards[i-1], rewards[i+1]].reduce((prev, cur) => {
+                if (cur+1 > prev) {
+                    return cur+1
+                } else return prev;
+            }, 0);
+        }
+    }
+    
+return rewards.reduce((prev, cur) => {
+        return prev + cur;
+    }, 0);
 }
