@@ -57,3 +57,11 @@ export function zigzagTraverse(array: number[][]) {
 	// Write your code here.
 	return log.length ? log : [-1];
 }
+const testCase = [
+	[1, 3],
+	[2, 4],
+	[5, 7],
+	[6, 8],
+	[9, 10]
+]
+zigzagTraverse(testCase);
