@@ -13,7 +13,7 @@
  export function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
     if (!headA || !headB) { return null }
 
-    let cachedA: object = {};
+    let cachedA: {[key: string]: ListNode[] } = {};
     let curA: ListNode | null = headA;
     
     while (curA) {
@@ -24,7 +24,7 @@
         
     }
     
-    let curB: ListNode = headB;
+    let curB: ListNode | null = headB;
 
     
     while (curB) {

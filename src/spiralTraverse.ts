@@ -1,5 +1,5 @@
 export function spiralTraverse(array: number[][]) {
-  // Write your code here.
+// Write your code here.
 	let expectedLength = array.length * array[0].length;
 	
 	let dir = {
@@ -50,5 +50,5 @@ export function spiralTraverse(array: number[][]) {
 
 	}
 	
-  return log.length ? log : [-1];
+return log.length ? log : [-1];
 }
