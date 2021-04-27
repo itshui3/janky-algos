@@ -1,5 +1,4 @@
 export function zigzagTraverse(array: number[][]) {
-
 // flat cases
 	if (array.length === 1) return array[0];
 	if (array[0].length === 1) return array.map(inner => inner[0]);
@@ -41,14 +40,24 @@ export function zigzagTraverse(array: number[][]) {
 				move = dir.za;
 			}
 			
-		} else if (move === dir.zi || move === dir.za) {
-			
-			if (pos[1] === array[0].length-1 || !pos[1]) {
+		} else if (move === dir.zi) {
+
+			if (pos[1] === array[0].length-1) {
 				move = dir.d;
 			} else
 			
-			if (pos[0] === array.length-1 || !pos[0]) {
+			if (!pos[0]) {
 				move = dir.r;
+			}
+			
+		} else if (move === dir.za) {
+
+			if (pos[0] === array.length-1) {
+				move = dir.r;
+			} else 
+
+			if (!pos[1]) {
+				move = dir.d;
 			}
 		}
 		
@@ -57,11 +66,11 @@ export function zigzagTraverse(array: number[][]) {
 	// Write your code here.
 	return log.length ? log : [-1];
 }
-const testCase = [
+
+export const testCase = [
 	[1, 3],
 	[2, 4],
 	[5, 7],
 	[6, 8],
 	[9, 10]
 ]
-zigzagTraverse(testCase);
