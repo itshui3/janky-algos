@@ -74,3 +74,14 @@ export const testCase = [
     [6, 8],
     [9, 10]
 ]
+
+interface distanceObj {
+    [key: string]: number;
+}
+let dObj: distanceObj = {};
+let dList = [0, 1, 2].reduce((prev, cur) => {
+    return {
+        ...prev,
+        cur: 0
+    }
+}, dObj);
