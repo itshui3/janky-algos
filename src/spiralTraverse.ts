@@ -1,54 +1,59 @@
-export function spiralTraverse(array: number[][]) {
-  // Write your code here.
-	let expectedLength = array.length * array[0].length;
+export function zigzagTraverse(array: number[][]) {
+
+// flat cases
+	if (array.length === 1) return array[0];
+	if (array[0].length === 1) return array.map(inner => inner[0]);
 	
+// interface
 	let dir = {
-		n: [-1, 0],
-		e: [0, 1],
-		s: [1, 0],
-		w: [0, -1]
-	};
-	
-	let i: [number, number] = [0, 0];
-	
-	let dirInterface = [dir.e, dir.s, dir.w, dir.n];
-	let cd = 0;
-	let curDir = dirInterface[cd];
-	
-	let tracker: Set<string> = new Set();
-	let log: number[] = [];
-
-	for (let x = 0; x < expectedLength; x++) {
-		// [0] move i
-		if (x > 0) [i[0], i[1]] = [curDir[0]+i[0], curDir[1]+i[1]];
+		d: [1, 0],
+		r: [0, 1],
 		
-		// [1] log position
-		log.push(array[i[0]][i[1]]);
-		tracker.add(`${i[0]}.${i[1]}`);
-		
-		if (log.length === expectedLength) break;
-		// [2] determine next direction
-		let nRow = curDir[0]+i[0];
-		let nCol = curDir[1]+i[1];
-
-		// validate direction
-		while (
-			// [a] wall
-			nRow < 0 || 
-			nCol < 0 || 
-			nRow >= array.length || 
-			nCol >= array[0].length ||
-			// [b] visited
-			tracker.has(`${nRow}.${nCol}`)
-		) {
-			cd++;
-			curDir = dirInterface[cd % 4];
-
-			nRow = curDir[0]+i[0];
-			nCol = curDir[1]+i[1];
-		}
-
+		zi: [-1, 1],
+		za: [1, -1]
 	}
 	
-  return log.length ? log : [-1];
+// loop body
+	let pos = [0, 0];
+	let log = [];
+	
+	let move = dir.za;
+	
+	for (let n = 0; n < array.length*array[0].length; n++) {
+// [0] move piece
+		if (n) {
+			[pos[0], pos[1]] = [move[0]+pos[0], move[1]+pos[1]];
+		}
+		
+// [1] log cur val
+		log.push(array[pos[0]][pos[1]]);
+		
+// [2] determine next move
+		// [a] prev === hook
+		if (move === dir.d || move === dir.r) { // at a wall
+			// to zig
+			if (pos[0] === array.length-1 || !pos[1]) {
+				move = dir.zi;
+			} else 
+			
+			// to zag
+			if (pos[1] === array[0].length-1 || !pos[0]) {
+				move = dir.za;
+			}
+			
+		} else if (move === dir.zi || move === dir.za) {
+			
+			if (pos[1] === array[0].length-1 || !pos[1]) {
+				move = dir.d;
+			} else
+			
+			if (pos[0] === array.length-1 || !pos[0]) {
+				move = dir.r;
+			}
+		}
+		
+	}
+	
+	// Write your code here.
+	return log.length ? log : [-1];
 }
