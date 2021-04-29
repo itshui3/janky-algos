@@ -21,7 +21,7 @@ meetingDuration: number,
         let startMin = getMin(start);
 
         let timeDiff = 60*(startHour - csHour) + (startMin - csMin);
-        if (timeDiff > meetingDuration) {
+        if (timeDiff >= meetingDuration) {
             
             let availableWindow = [
                 `${cStart}`,
@@ -32,8 +32,8 @@ meetingDuration: number,
         }
 
         cStart = end;
-        csHour = +end[0];
-        csMin = +end[1];
+        csHour = getHour(cStart);
+        csMin = getMin(cStart);
         // assign next endHour.endMin
     }
     // last endHour.endMin --> dayEndHour.dayEndMin
@@ -42,11 +42,11 @@ meetingDuration: number,
     let ebMin = getMin(endBound);
     
     let timeDiff = 60*(ebHour - csHour) + (ebMin - csMin);
-    if (timeDiff > meetingDuration) {
+    if (timeDiff >= meetingDuration) {
 
         let availableWindow = [
-            `${cStart[0]}:${(''+cStart[1]).length === 1 ? ''+cStart[1]+'0' : cStart[1]}`,
-            `${endBound[0]}:${(''+endBound[1]).length === 1 ? ''+endBound[1]+'0' : endBound[1]}`
+            `${cStart}`,
+            `${endBound}`
         ];
 
         cal1avail.push(availableWindow);
@@ -68,7 +68,7 @@ meetingDuration: number,
         let startMin = getMin(start);
 
         let timeDiff = 60*(startHour - csHour) + (startMin - csMin);
-        if (timeDiff > meetingDuration) {
+        if (timeDiff >= meetingDuration) {
             
             let availableWindow = [
                 `${cStart}`,
@@ -86,11 +86,11 @@ meetingDuration: number,
     // last endHour.endMin --> dayEndHour.dayEndMin
         // last endHour.endMin --> dayEndHour.dayEndMin
     endBound = dailyBounds2[1];
-    ebHour = getHour(dailyBounds2[1]);
-    ebMin = getMin(dailyBounds2[1]);
+    ebHour = getHour(endBound);
+    ebMin = getMin(endBound);
     
     timeDiff = 60*(ebHour - csHour) + (ebMin - csMin);
-    if (timeDiff > meetingDuration) {
+    if (timeDiff >= meetingDuration) {
 
         let availableWindow = [
             `${cStart}`,
@@ -104,11 +104,8 @@ meetingDuration: number,
     // [1] determine availability overlap periods
     let c1 = 0;
     let c2 = 0;
-    
-    while (c1 < cal1avail.length || c2 < cal2avail.length) {
-        /*
-        if start at c1 later than end at c2, move c2
-        */
+    while (c1 < cal1avail.length && c2 < cal2avail.length) {
+
         let start_c1Hour = getHour(cal1avail[c1][0]);
         let start_c1Min = getMin(cal1avail[c1][0]);
 
@@ -134,29 +131,24 @@ meetingDuration: number,
         if (end_c2inMins - start_c1inMins < meetingDuration) {
             c2++;
             continue;
-        } else if (end_c1inMins - start_c2inMins < meetingDuration) {
+        } 
+        if (end_c1inMins - start_c2inMins < meetingDuration) {
             c1++;
             continue;
         }
-            
-        if (
-            end_c2inMins - start_c1inMins > meetingDuration && 
-            end_c1inMins - start_c2inMins > meetingDuration) {
-            // greater start & lesser end
-            let greaterStart = start_c1inMins > start_c2inMins ? cal1avail[c1][0] : cal2avail[c2][0];
-            let lesserEnd = end_c1inMins < end_c2inMins ? cal1avail[c1][1] : cal2avail[c2][1];
-            
-            mutualAvail.push([greaterStart, lesserEnd]);
-            
-            c1++;
-            c2++;
-        }
         
+        let laterStart = start_c1inMins > start_c2inMins ? cal1avail[c1][0] : cal2avail[c2][0];
+        let earlierEnd = end_c1inMins < end_c2inMins ? cal1avail[c1][1] : cal2avail[c2][1];
+        
+        mutualAvail.push([laterStart, earlierEnd]);
+
+        c1++;
+        c2++;
     }
     
     // [2] determine windows of availability overlap > meetingDuration
     
-return mutualAvail.length ? mutualAvail : [['']];
+return mutualAvail.length ? mutualAvail : [];
 }
 
 function getInMins(hour: number, min: number) {
