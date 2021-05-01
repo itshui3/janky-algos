@@ -1,51 +1,50 @@
 export function reverseWordsInString(string: string) {
 // Write your code here.
+    
     let words: string[] = [];
-    let start = NaN;
-    
     let spaces: string[] = [];
-    let spaceStart = NaN;
+    let orderedPcs: string[] = [];
     
-    for (let i = 0; i < string.length; i++) {
-        // log words
+    let cur: 'space' | 'word' = 'space';
+    let start = 0;
+    
+    let i = 0
+    for (; i < string.length; i++) {
+        
         if (string[i] === ' ') {
-            
-            if (!isNaN(start)) {
-                let word = string.slice(start, i);
-                words.push(word);
-
-                start = NaN;
-            }
-            
-            if (isNaN(spaceStart)) spaceStart = i;
-
-        } else {
-            
-            if (!isNaN(spaceStart)) {
-                let space = string.slice(spaceStart, i);
-                spaces.push(space);
+        // start of space
+            if (cur === 'word') {
+                let spaceStr = string.slice(start, i);
+                console.log('spaceStr:', spaceStr);
                 
-                spaceStart = NaN;
+                if (spaceStr.length) {
+                    orderedPcs.push(spaceStr);
+                }
+                
+                start = i;
+                cur = 'space';
             }
-            
-            if (isNaN(start)) start = i;
-            
+        } else {
+        // start of word
+            if (cur === 'space') {
+                let wordStr = string.slice(start, i);
+                console.log('wordStr:', wordStr);
+                
+                if (wordStr.length) {
+                    orderedPcs.push(wordStr);
+                }
+                
+                start = i;
+                cur = 'word';
+            }
         }
+    }
+    orderedPcs.push(string.slice(start, i));
 
+    let reOrderedString: string = '';
+    
+    for (let l = orderedPcs.length-1; l > -1; l--) {
+        reOrderedString += orderedPcs[l];
     }
-    
-    words.push(string.slice(start, string.length));
-    
-    let buildString = '';
-    
-    let s = spaces.length-1;
-    for (let i = words.length-1; i > 0; i--) {
-        buildString += words[i] + spaces[s];
-        s--;
-    }
-    
-    buildString += words[0];
-    console.log(words, spaces);
-    
-return buildString;
+    return reOrderedString;
 }
