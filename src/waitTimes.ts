@@ -14,3 +14,19 @@ export function minimumWaitingTime(queries: number[]) {
     }), 0);
 
 };
+
+export function simple_minimumWaitingTime(queries: number[]) {
+  // Write your code here.
+	
+	let curWait = 0;
+	
+	return queries.sort((a, b) => a-b).reduce((totalWait, cur) => {
+		
+		let indexWait = totalWait + curWait;
+		
+		curWait += cur;
+		
+		return indexWait;
+	}, 0);
+	
+}
